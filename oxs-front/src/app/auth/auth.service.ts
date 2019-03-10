@@ -38,10 +38,10 @@ export class AuthService {
           this.isAuth = true;
           this.authStatusListener.next(true);
           const now = new Date();
-          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);//calc the curr time and add the expiration time
           console.log(expirationDate);
-          this.saveAuthData(token, expirationDate);
-          this.router.navigate(["/"]);
+          this.saveAuthData(token, expirationDate);//save the cookie in a local storage
+          this.router.navigate(["/"]);//nav to tenants list
         }
       });
   }

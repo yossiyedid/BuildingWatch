@@ -48,13 +48,15 @@ app.use((req, res, next) => {
 
 app.post("/api/users/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
-    const user = new User({
+    const user = new User({//create new user with hashed password
       username: req.body.username,
       password: hash
     });
     user
-      .save()
+      .save()//save the user in db
       .then(result => {
+        const now = new Date();
+        console.log("Username: "+req.body.username + " signup . timestamp : "+now.getTime());
         res.status(200).json({
           msg: "user created!",
           result: result
@@ -91,7 +93,10 @@ app.post("/api/users/login", (req, res, next) => {
         { username: foundUser.username, userId: foundUser._id },
         "SecretHashString", //using this in the verifying
         { expiresIn: "1h" }
+
       );
+        const now = new Date();
+        console.log("Username: "+req.body.username + " logged in . timestamp : "+now.getTime());
       res.status(200).json({
         token: token,
         expiresIn: 3600
@@ -114,7 +119,7 @@ app.post("/api/tenants",checkAuth, (req, res, next) => {
     address: req.body.address,
     phone: req.body.phone,
     financialDebt: req.body.financialDebt,
-    creator: req.userData.userId
+    creator: req.userData.userId//creator user id.
   });
   tenant.save().then(result => {
     res.status(201).json({
@@ -134,7 +139,7 @@ app.put("/api/tenants/:id",checkAuth,(req, res, next) => {
     financialDebt: req.body.financialDebt,
     creator: req.userData.userId
   });
-  Tenant.updateOne({ _id: req.params.id , creator: req.userData.userId}, tenant).then(result => {
+  Tenant.updateOne({ _id: req.params.id , creator: req.userData.userId}, tenant).then(result => {//find by id and creator
    if (result.mModifed > 0)  { //update successfully
      res.status(200).json({
        message: "Tenant edited successfully"
@@ -165,7 +170,7 @@ app.get("/api/tenants/:id",checkAuth, (req, res, next) => {
 
 //get all the user tenants
 app.get("/api/tenants",checkAuth, (req, res, next) => {
-  Tenant.find({creator:req.userData.userId}).then(documents => {
+  Tenant.find({creator:req.userData.userId}).then(documents => {//find the tenants that the user create
     res.status(200).json({
       message: "Tenants fetched successfully!",
       tenants: documents

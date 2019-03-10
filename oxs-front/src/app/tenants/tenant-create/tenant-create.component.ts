@@ -20,6 +20,7 @@ export class TenantCreateComponent implements OnInit {
     public route: ActivatedRoute
   ) {}
 
+  //save or edit a tenant
   onSaveTenant(form: NgForm) {
     if (form.invalid) {
       return;
