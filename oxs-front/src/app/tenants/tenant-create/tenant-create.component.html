@@ -1,0 +1,53 @@
+<mat-card>
+  <form #tenantForm="ngForm" (ngSubmit)="onSaveTenant(tenantForm)">
+    <mat-form-field>
+      <input matInput placeholder="Name"
+             type="text"
+             name="name"
+             [ngModel]="tenant?.name"
+             required
+             minlength="2"
+             #name="ngModel">
+      <mat-error *ngIf="name.invalid">Please enter a tenant name.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone number"
+             type="text"
+             name="phone"
+             [ngModel]="tenant?.phone"
+             required
+             minlength="9"
+             #phone="ngModel">
+      <mat-error *ngIf="phone.invalid">Please enter a tenant phone number.</mat-error>
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Address"
+             type="text"
+             name="address"
+             [ngModel]="tenant?.address"
+             required
+             minlength="2"
+             #address="ngModel">
+      <mat-error *ngIf="address.invalid">Please enter a tenant address.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Financial debt"
+             type="number"
+             name="financialDebt"
+             [ngModel]="tenant?.financialDebt"
+             required
+             #financialDebt="ngModel">
+      <mat-error *ngIf="financialDebt.invalid">Please enter a tenant financial debt
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Save Tenant</button>
+  </form>
+
+</mat-card>
+<button
+  mat-raised-button routerLink="/"
+  color="accent"
+  type="button">Move to tenants list</button>

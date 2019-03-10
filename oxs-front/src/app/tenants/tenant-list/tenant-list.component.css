@@ -1,0 +1,22 @@
+:host {
+  margin-top: 1rem;
+  display: block;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+  margin-top: 50px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+mat-radio-button {
+  margin-top: 10px;
+  width: 100%;
+}

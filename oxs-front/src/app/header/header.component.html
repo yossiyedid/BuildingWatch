@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span id="brand" ><a routerLink="/">BuildingWatch</a></span>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="isUserAuth">
+      <a class="rightLi" mat-button routerLink="/create" routerLinkActive="mat-accent">Add a Tenant</a>
+    </li>
+    <li *ngIf="!isUserAuth">
+      <a class="rightLi" mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+    </li>
+    <li *ngIf="!isUserAuth">
+      <a class="rightLi" mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+    </li>
+    <li *ngIf="isUserAuth">
+      <button class="rightLi" mat-button routerLink="/login" (click)="onLogout()" routerLinkActive="mat-accent">Logout</button>
+    </li>
+  </ul>
+</mat-toolbar>
